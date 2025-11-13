@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flow: The Operating System for Intelligent Venues</title>
+    <meta name="description" content="Flow is the central nervous system for your physical space, transforming guest WiFi into a powerful engine for data and engagement with our core Purple technology." />
+    <link rel="canonical" href="https://www.flow-networks.com/" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Flow Networks",
+          "url": "https://www.flow-networks.com/",
+          "logo": "https://www.flow-networks.com/logo.png",
+          "sameAs": [
+            "https://www.linkedin.com/company/flow-networks",
+            "https://twitter.com/FlowNetworks"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "url": "https://www.flow-networks.com/",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://www.flow-networks.com/search?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
+        }
+      ]
+    }
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --primary: 179 100% 25%;      /* Teal */
+        --secondary: 211 98% 48%;    /* Blue */
+        --accent: 45 100% 59%;       /* Yellow */
+        --primary-foreground: 183 100% 94%;
+        --secondary-foreground: 0 0% 100%;
+        --accent-foreground: 45 100% 5%;
+
+        --background: 220 40% 5%;
+        --foreground: 183 100% 94%;
+        --card: 220 12% 9%;
+        --card-foreground: 183 100% 94%;
+        --popover: 220 12% 7%;
+        --popover-foreground: 183 100% 94%;
+        --muted: 220 10% 23%;
+        --muted-foreground: 220 10% 65%;
+        --border: 220 10% 18%;
+        --input: 220 10% 14%;
+        --ring: 211 98% 58%;
+
+        --glow-primary: 0 0 25px hsla(var(--primary) / 0.4);
+        --glow-secondary: 0 0 25px hsla(var(--secondary) / 0.4);
+        --glow-accent: 0 0 25px hsla(var(--accent) / 0.4);
+        --glow-primary-strong: 0 0 35px hsla(var(--primary) / 0.6);
+        --glow-secondary-strong: 0 0 35px hsla(var(--secondary) / 0.6);
+        --glow-accent-strong: 0 0 35px hsla(var(--accent) / 0.6);
+
+        --radius: 0.75rem;
+        --transition-standard: 300ms;
+        --ease-gentle: cubic-bezier(0.4, 0.0, 0.2, 1);
+        --lift-subtle: translateY(-4px);
+      }
+      
+      body {
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        pointer-events: none;
+        background: radial-gradient(circle 640px at var(--mouse-x, 0px) var(--mouse-y, 0px), hsla(var(--primary) / 0.15), transparent 10%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      body:hover::before { opacity: 1; }
+      
+      @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: 'hsl(var(--primary))',
+              foreground: 'hsl(var(--primary-foreground))',
+            },
+            secondary: {
+              DEFAULT: 'hsl(var(--secondary))',
+              foreground: 'hsl(var(--secondary-foreground))',
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))',
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))',
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))',
+            },
+            popover: {
+                DEFAULT: 'hsl(var(--popover))',
+                foreground: 'hsl(var(--popover-foreground))',
+            }
+          },
+          borderRadius: {
+            lg: "var(--radius)",
+            md: "calc(var(--radius) - 2px)",
+            sm: "calc(var(--radius) - 4px)",
+          },
+          boxShadow: {
+            'glow-primary': 'var(--glow-primary)',
+            'glow-secondary': 'var(--glow-secondary)',
+            'glow-accent': 'var(--glow-accent)',
+            'glow-primary-strong': 'var(--glow-primary-strong)',
+            'glow-secondary-strong': 'var(--glow-secondary-strong)',
+            'glow-accent-strong': 'var(--glow-accent-strong)',
+          },
+          transitionTimingFunction: {
+            gentle: 'var(--ease-gentle)',
+          },
+          transitionDuration: {
+            standard: 'var(--transition-standard)',
+          },
+           animation: {
+            'gradient-move': 'gradient-move 8s ease-in-out infinite',
+            'fade-in-up': 'fade-in-up 0.8s var(--ease-gentle) forwards',
+           },
+           keyframes: {
+             'fade-in-up': {
+                'from': {
+                  opacity: '0',
+                  transform: 'translateY(20px)',
+                },
+                'to': {
+                  opacity: '1',
+                  transform: 'translateY(0)',
+                },
+             },
+           },
+        },
+      },
+    };
+  </script>
+</head>
+  <body class="bg-background text-foreground">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>

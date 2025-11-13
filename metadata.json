@@ -1,0 +1,5 @@
+{
+  "name": "Flow Website",
+  "description": "A visually appealing, responsive navigation header for a modern web application, featuring dropdown menus for desktop and a slide-out sheet menu for mobile, implemented in React and Tailwind CSS.",
+  "requestFramePermissions": []
+}
