@@ -1,12 +1,19 @@
-
 import React from 'react';
 import { Button } from './ui/Button';
 import { Check } from './Icons';
 
 const CnnTapSection = () => {
     return (
-        <section className="py-20 md:py-32 bg-card/20">
-            <div className="container mx-auto px-4 md:px-6">
+        <section 
+            className="py-20 md:py-32 bg-card/20 relative overflow-hidden"
+            style={{
+                backgroundImage: 'url(https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/tech-pattern-bg.svg)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+            }}
+        >
+            <div className="absolute inset-0 bg-card/80 backdrop-blur-[2px]"></div>
+            <div className="container mx-auto px-4 md:px-6 relative z-10">
                 <div className="grid md:grid-cols-2 gap-12 items-center">
                     <div className="animate-fade-in-up">
                         <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">

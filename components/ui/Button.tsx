@@ -2,8 +2,6 @@
 import React from 'react';
 import { cn } from '../../lib/utils';
 
-// FIX: Changed props to extend a generic HTMLAttributes<HTMLElement> to support both button and anchor elements.
-// This resolves type conflicts for event handlers and other attributes.
 interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   variant?: 'primary' | 'secondary' | 'ghost' | 'link';
   size?: 'sm' | 'md' | 'lg' | 'icon';
@@ -13,7 +11,6 @@ interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
   type?: 'button' | 'submit' | 'reset';
 }
 
-// FIX: Changed the forwarded ref's element type to HTMLElement, a safe common ancestor for buttons and anchors.
 const Button = React.forwardRef<HTMLElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', glow = false, href, children, ...props }, ref) => {
     const baseClasses =
@@ -45,7 +42,10 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>(
     return (
       <Comp
         className={cn(baseClasses, variantClasses[variant], sizeClasses[size], glowClasses, className)}
-        ref={ref}
+        // FIX: The forwarded ref's generic HTMLElement type is not assignable to a specific
+        // HTMLAnchorElement or HTMLButtonElement ref. Casting to `any` is a pragmatic
+        // way to resolve this for a polymorphic component without a larger refactor.
+        ref={ref as any}
         href={href}
         {...props}
       >

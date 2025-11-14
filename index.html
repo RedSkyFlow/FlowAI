@@ -167,6 +167,7 @@
            animation: {
             'gradient-move': 'gradient-move 8s ease-in-out infinite',
             'fade-in-up': 'fade-in-up 0.8s var(--ease-gentle) forwards',
+            'ken-burns': 'ken-burns 20s ease-in-out infinite',
            },
            keyframes: {
              'fade-in-up': {
@@ -178,6 +179,10 @@
                   opacity: '1',
                   transform: 'translateY(0)',
                 },
+             },
+             'ken-burns': {
+               '0%, 100%': { transform: 'scale(1.05) rotate(-1deg)' },
+               '50%': { transform: 'scale(1.15) rotate(1deg)' },
              },
            },
         },

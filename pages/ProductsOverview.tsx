@@ -4,25 +4,17 @@ import { NavLinkWithSubLinks } from '../types';
 import { Button } from '../components/ui/Button';
 import { ArrowRight } from '../components/Icons';
 
-const AnimatedGridBackground = () => (
+const HeroImageBackground = () => (
     <div className="absolute inset-0 z-0 overflow-hidden">
-      <div 
-        className="absolute inset-0"
-        style={{
-          backgroundImage: 
-            `radial-gradient(hsla(var(--primary)/0.1) 1px, transparent 1px),
-             radial-gradient(hsla(var(--primary)/0.1) 1px, transparent 1px)`,
-          backgroundSize: '32px 32px',
-          backgroundPosition: '0 0, 16px 16px',
-          maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%)',
-        }}
-      />
-      <div 
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--secondary)/0.1),transparent_40%)] animate-pulse"
-        style={{ animationDuration: '6s' }}
-      />
+        <img 
+            src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/products-hero-bg.jpg"
+            alt="Abstract visualization of product blocks"
+            className="w-full h-full object-cover animate-ken-burns"
+        />
+        <div className="absolute inset-0 bg-background/70 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
     </div>
-  );
+);
 
 const ProductsOverview = () => {
     const productsLink = MAIN_NAV_LINKS.find(link => link.label === 'Products');
@@ -57,7 +49,7 @@ const ProductsOverview = () => {
     return (
         <>
             <section className="relative flex flex-col justify-center items-center text-center overflow-hidden py-24 sm:py-32">
-                <AnimatedGridBackground />
+                <HeroImageBackground />
                 <div className="container relative z-10 mx-auto px-4 md:px-6">
                      <div className="animate-fade-in-up" style={{ animationDelay: '200ms'}}>
                         <h1 className="text-4xl font-bold tracking-tight text-transparent sm:text-6xl md:text-7xl bg-clip-text bg-gradient-to-r from-accent via-primary-foreground to-accent animate-gradient-move bg-[length:250%_auto]">

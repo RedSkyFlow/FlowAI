@@ -58,12 +58,13 @@ export const NavigationMenuLink: React.FC<{ asChild?: boolean; children: React.R
   className,
 }) => {
   if (asChild) {
-    // FIX: Add type assertion to fix cloning error with `asChild`.
-    // `React.isValidElement` alone is not enough to narrow `children.props` from `unknown`.
-    // Casting to `React.ReactElement<any>` ensures props can be read and extended.
     if (React.isValidElement(children)) {
-      return React.cloneElement(children as React.ReactElement<any>, {
-        className: cn(children.props.className, className),
+      // FIX: Add type assertion to fix cloning error with `asChild`.
+      // `React.isValidElement` alone is not enough to narrow `children.props` from `unknown`.
+      // Casting to `React.ReactElement<any>` ensures props can be read and extended.
+      const child = children as React.ReactElement<any>;
+      return React.cloneElement(child, {
+        className: cn(child.props.className, className),
       });
     }
   }

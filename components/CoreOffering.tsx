@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ArrowRight, BrainCircuit } from './Icons';
+import { ArrowRight } from './Icons';
 import { Button } from './ui/Button';
 
 const CoreOffering = () => {
@@ -48,9 +48,13 @@ const CoreOffering = () => {
                         </div>
                     </div>
                     <div className="flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '200ms'}}>
-                        <div className="relative p-8">
-                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.1),transparent_50%)] animate-pulse" style={{ animationDuration: '5s' }} />
-                             <BrainCircuit className="h-64 w-64 text-primary opacity-50" />
+                        <div className="relative group">
+                            <div className="absolute -inset-2 bg-gradient-to-br from-secondary via-primary to-accent rounded-2xl opacity-20 group-hover:opacity-40 blur-2xl transition-opacity duration-500 animate-pulse" style={{ animationDuration: '6s' }}></div>
+                            <img 
+                                src="https://storage.googleapis.com/aistudio-hosting/project-assets/images/a8383921-1279-4d1a-9657-37a5996f2a63.jpeg"
+                                alt="Visual representation of data flowing into a central AI core"
+                                className="relative w-full max-w-md rounded-2xl"
+                            />
                         </div>
                     </div>
                 </div>

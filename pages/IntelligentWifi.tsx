@@ -1,30 +1,25 @@
 
 import React, { useState } from 'react';
 import { Button } from '../components/ui/Button';
-import { ArrowRight, Wifi, UserCheck, Megaphone, BrainCircuit, Hotel, ShoppingCart, Plane, TrendingUp, Wrench, ShieldCheck } from '../components/Icons';
+import { ArrowRight, Wifi, UserCheck, Megaphone, Hotel, ShoppingCart, Plane, TrendingUp, Wrench, ShieldCheck } from '../components/Icons';
 import { cn } from '../lib/utils';
+import { IMAGES } from '../assets';
 
-const AnimatedGridBackground = () => (
+const HeroImageBackground = () => (
     <div className="absolute inset-0 z-0 overflow-hidden">
-        <div 
-            className="absolute inset-0"
-            style={{
-                backgroundImage: `radial-gradient(hsla(var(--primary)/0.1) 1px, transparent 1px), radial-gradient(hsla(var(--primary)/0.1) 1px, transparent 1px)`,
-                backgroundSize: '32px 32px',
-                backgroundPosition: '0 0, 16px 16px',
-                maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%)',
-            }}
+        <img 
+            src={IMAGES.AI_GATEWAY_HERO}
+            alt="Abstract network visualization"
+            className="w-full h-full object-cover animate-ken-burns"
         />
-        <div 
-            className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--secondary)/0.1),transparent_40%)] animate-pulse"
-            style={{ animationDuration: '6s' }}
-        />
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
     </div>
 );
 
 const WifiHero = () => (
     <section className="relative flex flex-col justify-center items-center text-center overflow-hidden py-24 sm:py-32">
-        <AnimatedGridBackground />
+        <HeroImageBackground />
         <div className="container relative z-10 mx-auto px-4 md:px-6">
             <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 <h1 className="text-4xl font-bold tracking-tight text-transparent sm:text-6xl md:text-7xl bg-clip-text bg-gradient-to-r from-accent via-primary-foreground to-accent animate-gradient-move bg-[length:250%_auto]">
@@ -58,18 +53,21 @@ const HowItWorks = () => {
             title: "Sensory Input",
             subtitle: "Connect & Capture",
             description: "The WiFi connection provides irrefutable proof of physical presence. Through branded splash pages, you capture critical first-party data, bridging the physical and digital worlds.",
+            image: IMAGES.AI_GATEWAY_CROP_SENSORY
         },
         {
             phase: "Phase 2",
             title: "Intelligent Orchestration",
             subtitle: "The AI Gateway",
             description: "Our AI Gateway fuses real-time location data with siloed information from your PMS, POS, and CRM systems, creating a single, evolving profile with hyper-local context.",
+            image: IMAGES.AI_GATEWAY_CROP_ORCHESTRATION
         },
         {
             phase: "Phase 3",
             title: "Automated Action",
             subtitle: "Engage & Convert",
             description: "Trigger hyper-contextual messages via SMS, WhatsApp, and email at the precise moment of relevance, transforming a passive visit into an interactive, revenue-driving experience.",
+            image: IMAGES.AI_GATEWAY_CROP_ACTION
         }
     ];
 
@@ -80,20 +78,16 @@ const HowItWorks = () => {
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">How It Works</h2>
                     <p className="mt-4 text-lg text-muted-foreground">A simple, powerful, three-phase process to turn presence into profit.</p>
                 </div>
-                <div className="grid md:grid-cols-3 gap-8 relative">
-                    <div className="hidden md:block absolute top-1/2 left-0 w-full h-px -translate-y-1/2">
-                       <svg width="100%" height="2" className="overflow-visible">
-                         <path d="M0 1 H10000" stroke="hsl(var(--border))" strokeWidth="2" strokeDasharray="8 8" />
-                       </svg>
-                    </div>
+                <div className="grid md:grid-cols-3 gap-8 items-start">
                     {steps.map((step, index) => (
-                        <div key={index} className="bg-card/30 backdrop-blur-md border border-border/50 rounded-lg p-8 text-center animate-fade-in-up relative z-10" style={{ animationDelay: `${200 + index * 150}ms` }}>
-                            <div className="mb-4">
+                        <div key={index} className="bg-card/30 backdrop-blur-md border border-border/50 rounded-lg overflow-hidden text-center animate-fade-in-up flex flex-col h-full shadow-lg" style={{ animationDelay: `${200 + index * 150}ms` }}>
+                            <img src={step.image} alt={step.title} className="w-full h-48 object-cover"/>
+                            <div className="p-8 flex flex-col flex-grow">
                                 <span className="text-sm font-bold text-primary uppercase tracking-widest">{step.phase}</span>
                                 <h3 className="text-2xl font-bold text-foreground mt-1">{step.title}</h3>
                                 <p className="text-accent font-semibold">{step.subtitle}</p>
+                                <p className="text-muted-foreground mt-4 flex-grow">{step.description}</p>
                             </div>
-                            <p className="text-muted-foreground">{step.description}</p>
                         </div>
                     ))}
                 </div>
@@ -137,13 +131,7 @@ const AiGatewaySection = () => (
     <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 md:px-6">
             <div className="grid md:grid-cols-2 gap-12 items-center">
-                <div className="flex items-center justify-center animate-fade-in-up">
-                    <div className="relative p-8">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--primary)/0.1),transparent_50%)] animate-pulse" style={{ animationDuration: '5s' }} />
-                        <BrainCircuit className="h-64 w-64 text-primary opacity-50" />
-                    </div>
-                </div>
-                <div className="animate-fade-in-up" style={{ animationDelay: '200ms'}}>
+                <div className="animate-fade-in-up">
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
                         The Intelligence Overlay, Not a Replacement
                     </h2>
@@ -159,6 +147,16 @@ const AiGatewaySection = () => (
                         </ul>
                     </div>
                 </div>
+                <div className="flex items-center justify-center animate-fade-in-up" style={{ animationDelay: '200ms'}}>
+                    <div className="relative group">
+                        <div className="absolute -inset-2 bg-gradient-to-br from-secondary via-primary to-accent rounded-2xl opacity-20 group-hover:opacity-40 blur-2xl transition-opacity duration-500"></div>
+                        <img 
+                            src={IMAGES.AI_GATEWAY_HERO}
+                            alt="AI Gateway data visualization"
+                            className="relative w-full max-w-lg rounded-2xl shadow-2xl shadow-black/30"
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -167,31 +165,48 @@ const AiGatewaySection = () => (
 const IndustryUseCases = () => {
     const [activeTab, setActiveTab] = useState('Hospitality');
     const tabs = [
-        { name: 'Hospitality', icon: Hotel, content: "A returning couple connects to the WiFi. The AI greets them by name, recognizes their anniversary from the PMS, and proactively offers to book a table at their favorite on-site restaurant." },
-        { name: 'Retail', icon: ShoppingCart, content: "A shopper's dwell time near an electronics store triggers a personalized SMS: 'Hi Sarah, we see you're near [Store Name]. Show this for 15% off your purchase today!' turning passive browsing into a sale." },
-        { name: 'Airports', icon: Plane, content: "A frequent flyer's phone connects automatically via Passpoint. The AI instantly recognizes them, triggering a push notification: 'Welcome back, Adam. Your flight is on time at Gate B12. Enjoy complimentary lounge access.'" }
+        { name: 'Hospitality', icon: Hotel, content: "A returning couple connects to the WiFi. The AI greets them by name, recognizes their anniversary from the PMS, and proactively offers to book a table at their favorite on-site restaurant.", color: 'hsla(var(--primary) / 0.2)' },
+        { name: 'Retail', icon: ShoppingCart, content: "A shopper's dwell time near an electronics store triggers a personalized SMS with a time-sensitive 15% discount, turning passive browsing into an immediate sales opportunity.", color: 'hsla(var(--secondary) / 0.2)' },
+        { name: 'Airports', icon: Plane, content: "A frequent flyer connects automatically via Passpoint. The AI recognizes them, confirms their flight is on time at Gate B12, and offers complimentary lounge access, streamlining their journey.", color: 'hsla(var(--accent) / 0.2)' },
     ];
 
-    const activeContent = tabs.find(tab => tab.name === activeTab);
+    const activeTabData = tabs.find(tab => tab.name === activeTab);
 
     return (
         <section className="py-20 md:py-32 bg-card/20">
             <div className="container mx-auto px-4 md:px-6">
-                 <div className="text-center max-w-3xl mx-auto mb-16">
-                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Synergy in Action</h2>
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">The Synergy in Action</h2>
                     <p className="mt-4 text-lg text-muted-foreground">See how our platform delivers measurable value across different industries.</p>
                 </div>
-                <div className="max-w-4xl mx-auto">
-                    <div className="flex justify-center border-b border-border mb-8">
-                        {tabs.map(tab => (
-                            <button key={tab.name} onClick={() => setActiveTab(tab.name)} className={cn("flex items-center gap-2 px-4 py-3 font-semibold border-b-2 transition-colors", activeTab === tab.name ? 'border-accent text-accent' : 'border-transparent text-muted-foreground hover:text-foreground')}>
-                                <tab.icon className="h-5 w-5" />
-                                <span>{tab.name}</span>
-                            </button>
-                        ))}
+                <div className="relative bg-card rounded-xl shadow-2xl overflow-hidden border border-border/50">
+                    <div className="absolute inset-0 transition-opacity duration-1000">
+                        <img src={IMAGES.AI_GATEWAY_HERO} alt="AI Network" className="w-full h-full object-cover opacity-10" />
+                        <div className="absolute inset-0 bg-background/80"></div>
                     </div>
-                    <div className="bg-card p-8 rounded-lg shadow-lg text-center min-h-[120px] flex items-center justify-center">
-                        <p className="text-lg text-foreground/90 italic">"{activeContent?.content}"</p>
+                     <div 
+                        className="absolute inset-0 transition-colors duration-700"
+                        style={{ backgroundColor: activeTabData?.color }}
+                    ></div>
+                    <div className="relative z-10 grid md:grid-cols-3">
+                        <div className="flex flex-col border-b md:border-b-0 md:border-r border-border/50">
+                            {tabs.map(tab => (
+                                <button
+                                    key={tab.name}
+                                    onClick={() => setActiveTab(tab.name)}
+                                    className={cn(
+                                        "p-6 text-left flex items-center gap-4 transition-colors duration-300",
+                                        activeTab === tab.name ? "bg-primary/10" : "hover:bg-primary/5"
+                                    )}
+                                >
+                                    <tab.icon className={cn("h-8 w-8", activeTab === tab.name ? "text-primary" : "text-muted-foreground")} />
+                                    <span className={cn("text-lg font-semibold", activeTab === tab.name ? "text-primary" : "text-foreground")}>{tab.name}</span>
+                                </button>
+                            ))}
+                        </div>
+                        <div className="md:col-span-2 p-8 md:p-12 min-h-[250px] flex items-center">
+                            <p className="text-xl text-foreground/90 leading-relaxed">{activeTabData?.content}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -201,27 +216,24 @@ const IndustryUseCases = () => {
 
 const BusinessOutcomes = () => {
     const outcomes = [
-        { icon: TrendingUp, title: 'Unlock New Revenue', description: "Redirecting 25% of mass promotion spending to personalized offers can increase ROI by 200%. Travelers with personalized campaigns show a 45% increase in spend." },
-        { icon: Wrench, title: 'Boost Operational Efficiency', description: "Deliver 'Actionable AI' to staff. A maintenance tech can instantly access building schematics based on their location, enabling faster, more efficient repairs." },
-        { icon: ShieldCheck, title: 'Build a Defensible Moat', description: "Achieve true data sovereignty. Own and control your most valuable asset: a deep, proprietary understanding of your customers' in-venue behavior." }
+        { icon: TrendingUp, title: "Unlock New Revenue", description: "Move beyond generic marketing to deliver personalized offers that directly influence purchasing behavior and create new monetization opportunities through targeted advertising." },
+        { icon: Wrench, title: "Boost Operational Efficiency", description: "Empower staff with 'Actionable AI' that provides instant, context-aware answers and automates workflows, from stock checks to maintenance orders, reducing manual effort." },
+        { icon: ShieldCheck, title: "Build Data Sovereignty", description: "Own and control your customer relationships and data assets. Our flexible architecture ensures you retain full sovereignty, creating a deep, proprietary understanding of in-venue behavior." }
     ];
-
     return (
-        <section className="py-20 md:py-32">
+         <section className="py-20 md:py-32">
             <div className="container mx-auto px-4 md:px-6">
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">Driving Tangible Business Outcomes</h2>
-                    <p className="mt-4 text-lg text-muted-foreground">This is more than technology—it's a strategy for measurable growth and competitive advantage.</p>
+                    <p className="mt-4 text-lg text-muted-foreground">Our platform extends far beyond enhancing the customer experience to drive measurable improvements in core business metrics.</p>
                 </div>
                 <div className="grid md:grid-cols-3 gap-8">
                     {outcomes.map((outcome, index) => (
-                        <div key={index} className="bg-card/30 backdrop-blur-md border border-border/50 p-8 rounded-lg animate-fade-in-up" style={{ animationDelay: `${200 + index * 150}ms` }}>
-                            <div className="flex items-center gap-4 mb-4">
-                                <div className="bg-secondary/10 p-3 rounded-lg border border-secondary/20">
-                                    <outcome.icon className="h-6 w-6 text-secondary" />
-                                </div>
-                                <h3 className="text-xl font-bold text-foreground">{outcome.title}</h3>
+                        <div key={index} className="bg-card/30 border border-border/50 p-8 rounded-lg animate-fade-in-up flex flex-col items-center text-center" style={{ animationDelay: `${200 + index * 150}ms` }}>
+                             <div className="bg-primary/10 p-4 rounded-full border border-primary/20 mb-6">
+                                <outcome.icon className="h-8 w-8 text-primary" />
                             </div>
+                            <h3 className="text-xl font-semibold text-foreground mb-2">{outcome.title}</h3>
                             <p className="text-muted-foreground">{outcome.description}</p>
                         </div>
                     ))}
@@ -231,18 +243,14 @@ const BusinessOutcomes = () => {
     );
 };
 
-const FinalCta = () => (
+const CTASection = () => (
     <section className="py-20 md:py-32 text-center bg-card/20">
         <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to unlock your venue's potential?</h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">Let's discuss how Flow's Intelligent WiFi platform can transform your customer experience and your bottom line.</p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to turn your venue's WiFi into your most powerful asset?</h2>
+            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">Let's talk about how Flow can create hyper-personalized experiences for your customers and deliver actionable intelligence to your team.</p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
-                <Button href="/contact" variant="secondary" size="lg" glow>
-                    Contact Sales
-                </Button>
-                <Button href="/solutions/ai-gateway" variant="ghost" size="lg" className="group text-foreground/80 hover:text-accent">
-                    Explore the AI Vision
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <Button href="/contact" variant="primary" size="lg" glow>
+                    Request a Personalized Demo
                 </Button>
             </div>
         </div>
@@ -259,7 +267,7 @@ const IntelligentWifi: React.FC = () => {
             <AiGatewaySection />
             <IndustryUseCases />
             <BusinessOutcomes />
-            <FinalCta />
+            <CTASection />
         </>
     );
 };

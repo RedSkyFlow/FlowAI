@@ -3,30 +3,23 @@ import React from 'react';
 import { Button } from './ui/Button';
 import { ArrowRight } from './Icons';
 
-const AnimatedGridBackground = () => (
-  <div className="absolute inset-0 z-0 overflow-hidden">
-    <div 
-      className="absolute inset-0"
-      style={{
-        backgroundImage: 
-          `radial-gradient(hsla(var(--primary)/0.1) 1px, transparent 1px),
-           radial-gradient(hsla(var(--primary)/0.1) 1px, transparent 1px)`,
-        backgroundSize: '32px 32px',
-        backgroundPosition: '0 0, 16px 16px',
-        maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%)',
-      }}
-    />
-    <div 
-      className="absolute inset-0 bg-[radial-gradient(circle_at_center,hsl(var(--secondary)/0.1),transparent_40%)] animate-pulse"
-      style={{ animationDuration: '6s' }}
-    />
-  </div>
+const HeroImageBackground = () => (
+    <div className="absolute inset-0 z-0 overflow-hidden">
+        <img 
+            src="https://storage.googleapis.com/aistudio-hosting/project-assets/images/a8383921-1279-4d1a-9657-37a5996f2a63.jpeg"
+            alt="Intelligent Venue AI network visualization"
+            className="w-full h-full object-cover animate-ken-burns"
+        />
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
+    </div>
 );
+
 
 const HeroSection = () => {
   return (
     <section className="relative flex h-[calc(100vh-80px)] min-h-[600px] w-full items-center justify-center overflow-hidden py-20 md:py-32">
-       <AnimatedGridBackground />
+       <HeroImageBackground />
        <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
         <div className="animate-fade-in-up" style={{ animationDelay: '200ms', animationFillMode: 'backwards' }}>
           <h1 className="text-4xl font-bold tracking-tight text-transparent sm:text-6xl md:text-7xl bg-clip-text bg-gradient-to-r from-accent via-primary-foreground to-accent animate-gradient-move bg-[length:250%_auto]">

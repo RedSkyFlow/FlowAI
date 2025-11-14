@@ -37,9 +37,9 @@ export const Sheet: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 export const SheetTrigger: React.FC<{ children: React.ReactNode; asChild?: boolean }> = ({ children, asChild }) => {
   const { setIsOpen } = useSheet();
   if (asChild) {
-    // FIX: Added a type assertion to `children` to fix cloning error with `asChild`.
-    // This ensures TypeScript allows adding props like `onClick` to the cloned element.
     if (React.isValidElement(children)) {
+      // FIX: Added a type assertion to `children` to fix cloning error with `asChild`.
+      // This ensures TypeScript allows adding props like `onClick` to the cloned element.
       return React.cloneElement(children as React.ReactElement<any>, {
         onClick: () => setIsOpen(true),
       });
@@ -52,12 +52,13 @@ export const SheetTrigger: React.FC<{ children: React.ReactNode; asChild?: boole
 export const SheetClose: React.FC<{ children: React.ReactNode; asChild?: boolean }> = ({ children, asChild }) => {
   const { setIsOpen } = useSheet();
   if (asChild) {
-    // FIX: Added a type assertion to `children` to fix cloning errors with `asChild`.
-    // This allows safely accessing the child's props and cloning the element.
     if (React.isValidElement(children)) {
-      return React.cloneElement(children as React.ReactElement<any>, {
+      // FIX: Added a type assertion to `children` to fix cloning errors with `asChild`.
+      // This allows safely accessing the child's props and cloning the element.
+      const child = children as React.ReactElement<any>;
+      return React.cloneElement(child, {
         onClick: (e: React.MouseEvent) => {
-          const childOnClick = children.props.onClick;
+          const childOnClick = child.props.onClick;
           if(childOnClick) childOnClick(e);
           setIsOpen(false);
         }
