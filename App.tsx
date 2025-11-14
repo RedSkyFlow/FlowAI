@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import HomePage from './HomePage';
 import ProductsOverview from './pages/ProductsOverview';
 import { usePathname } from './hooks/usePathname';
+import IntelligentWifi from './pages/IntelligentWifi';
 
 const App: React.FC = () => {
   const pathname = usePathname();
@@ -23,6 +24,9 @@ const App: React.FC = () => {
   }, []);
 
   const renderPage = () => {
+    if (pathname.startsWith('/products/intelligent-wifi')) {
+      return <IntelligentWifi />;
+    }
     if (pathname.startsWith('/products')) {
       return <ProductsOverview />;
     }
