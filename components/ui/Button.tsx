@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 
 interface ButtonProps extends React.HTMLAttributes<HTMLElement> {
@@ -37,20 +38,32 @@ const Button = React.forwardRef<HTMLElement, ButtonProps>(
         link: '',
     }[variant] : '';
 
-    const Comp: React.ElementType = href ? 'a' : 'button';
+    const commonProps = {
+      className: cn(baseClasses, variantClasses[variant], sizeClasses[size], glowClasses, className),
+      // The 'any' cast is a pragmatic solution for polymorphic component refs
+      ref: ref as any, 
+      ...props,
+    };
+
+    if (href) {
+      if (href.startsWith('/')) {
+        return (
+          <Link to={href} {...commonProps}>
+            {children}
+          </Link>
+        );
+      }
+      return (
+        <a href={href} {...commonProps}>
+          {children}
+        </a>
+      );
+    }
 
     return (
-      <Comp
-        className={cn(baseClasses, variantClasses[variant], sizeClasses[size], glowClasses, className)}
-        // FIX: The forwarded ref's generic HTMLElement type is not assignable to a specific
-        // HTMLAnchorElement or HTMLButtonElement ref. Casting to `any` is a pragmatic
-        // way to resolve this for a polymorphic component without a larger refactor.
-        ref={ref as any}
-        href={href}
-        {...props}
-      >
+      <button {...commonProps}>
         {children}
-      </Comp>
+      </button>
     );
   }
 );

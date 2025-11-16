@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* CORRECTED HIERARCHY FROM DESIGN DOCUMENT */
+  --primary: 176 83% 46%;      /* Flow Primary Teal       | #14D8CC */
+  --secondary: 205 100% 51%;   /* Flow Action Blue      | #0496FF */
+  --accent: 40 100% 64%;       /* Flow Highlight Yellow | #FFC145 */
+  --background: 233 36% 17%;    /* Background Dark Primary | #1C203C */
+  --foreground: 290 25% 95%;    /* Text Light            | #F5F0F6 */
+
+  /* Derived colors, updated for consistency */
+  --primary-foreground: 176 83% 5%;
+  --secondary-foreground: 0 0% 100%;
+  --accent-foreground: 40 100% 5%;
+
+  --card: 233 15% 21%;
+  --card-foreground: 290 25% 95%;
+  --popover: 233 15% 19%;
+  --popover-foreground: 290 25% 95%;
+  --muted: 233 15% 30%;
+  --muted-foreground: 233 15% 65%;
+  --border: 233 15% 25%;
+  --input: 233 15% 23%;
+  --ring: 205 100% 51%;
+
+  /* Glows will update automatically based on core colors */
+  --glow-primary: 0 0 25px hsla(var(--primary) / 0.4);
+  --glow-secondary: 0 0 25px hsla(var(--secondary) / 0.4);
+  --glow-accent: 0 0 25px hsla(var(--accent) / 0.4);
+  --glow-primary-strong: 0 0 35px hsla(var(--primary) / 0.6);
+  --glow-secondary-strong: 0 0 35px hsla(var(--secondary) / 0.6);
+  --glow-accent-strong: 0 0 35px hsla(var(--accent) / 0.6);
+
+  --radius: 0.75rem;
+  --transition-standard: 300ms;
+  --ease-gentle: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --lift-subtle: translateY(-4px);
+}
+
+body {
+  color: hsl(var(--foreground));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* DIAGNOSTIC STEP: Simple animated gradient to test file writing and rendering. */
+  background: linear-gradient(-45deg, hsl(var(--background)), hsl(var(--primary) / 0.15), hsl(var(--background)), hsl(var(--secondary) / 0.15));
+  background-size: 400% 400%;
+  animation: gradient-move 15s ease infinite;
+}
+
+@keyframes gradient-move {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

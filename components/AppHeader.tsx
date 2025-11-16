@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, FlowLogo } from './Icons';
-import { usePathname } from '../hooks/usePathname';
 import { cn } from '../lib/utils';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "./ui/Accordion";
 import { MAIN_NAV_LINKS } from '../constants';
@@ -51,7 +51,7 @@ const DesktopDropdownMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSu
                             <h4 className="font-bold text-accent text-sm tracking-wider uppercase px-3 pt-2">{category}</h4>
                             <ul className="space-y-1">
                               {items.map((item) => (
-                                <ListItem key={item.href} href={item.href} title={item.label}>
+                                <ListItem key={item.href} to={item.href} title={item.label}>
                                   {item.shortDescription}
                                 </ListItem>
                               ))}
@@ -63,12 +63,12 @@ const DesktopDropdownMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSu
                 </NavigationMenuContent>
               </>
             ) : (
-              <a href={link.href} className={cn("inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted/50 hover:text-primary focus:bg-muted/50 focus:text-primary focus:outline-none", isLinkActive(link) ? "text-secondary font-semibold" : "text-foreground/90")}>
+              <Link to={link.href} className={cn("inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted/50 hover:text-primary focus:bg-muted/50 focus:text-primary focus:outline-none", isLinkActive(link) ? "text-secondary font-semibold" : "text-foreground/90")}>
                    <div className="flex items-center gap-2">
                       {link.icon && React.createElement(link.icon, { className: "h-4 w-4" })}
                       {link.label}
                   </div>
-              </a>
+              </Link>
             )}
           </NavigationMenuItem>
         )))}
@@ -99,12 +99,12 @@ const MobileMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) =
               </Accordion>
             ) : (
               <SheetClose asChild>
-                <a href={subLink.href} className="flex items-center gap-2 p-2 rounded-md hover:bg-primary/10 transition-colors text-muted-foreground hover:text-foreground">
+                <Link to={subLink.href} className="flex items-center gap-2 p-2 rounded-md hover:bg-primary/10 transition-colors text-muted-foreground hover:text-foreground">
                   <span className="flex items-center gap-2">
                     {subLink.icon && React.createElement(subLink.icon, { className: "h-4 w-4" })}
                     {subLink.label}
                   </span>
-                </a>
+                </Link>
               </SheetClose>
             )}
           </li>
@@ -140,12 +140,12 @@ const MobileMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) =
                                 </AccordionItem>
                             ) : (
                                 <SheetClose key={link.href} asChild>
-                                    <a href={link.href} className={cn("flex items-center gap-2 text-lg font-semibold py-4 border-b border-border", isLinkActive(link) ? 'text-secondary' : 'text-foreground/90 hover:text-primary')}>
+                                    <Link to={link.href} className={cn("flex items-center gap-2 text-lg font-semibold py-4 border-b border-border", isLinkActive(link) ? 'text-secondary' : 'text-foreground/90 hover:text-primary')}>
                                       <span className="flex items-center gap-2">
                                         {link.icon && React.createElement(link.icon, { className: "h-5 w-5" })}
                                         {link.label}
                                       </span>
-                                    </a>
+                                    </Link>
                                 </SheetClose>
                             )
                         )}
@@ -165,7 +165,7 @@ const MobileMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) =
 };
 
 const AppHeader = () => {
-  const pathname = usePathname();
+  const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
@@ -192,13 +192,13 @@ const AppHeader = () => {
     >
       <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
         <div className="flex-shrink-0">
-          <a href="/" aria-label="Flow Networks Home" title="Flow Networks Home" className="flex items-center group">
+          <Link to="/" aria-label="Flow Networks Home" title="Flow Networks Home" className="flex items-center group">
             <FlowLogo className="h-8 w-auto transition-transform duration-300 group-hover:scale-110" />
             <div className="flex flex-col justify-center ml-2">
               <span className="text-sm font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-accent via-primary-foreground to-accent animate-gradient-move bg-[length:250%_auto]">Flow</span>
               <span className="text-sm font-bold uppercase text-transparent bg-clip-text bg-gradient-to-r from-accent via-primary-foreground to-accent animate-gradient-move bg-[length:250%_auto] -mt-1">Networks</span>
             </div>
-          </a>
+          </Link>
         </div>
         
         <nav className="hidden items-center md:flex flex-grow justify-center">

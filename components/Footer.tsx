@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { MAIN_NAV_LINKS } from '../constants';
 import { FlowLogo } from './Icons';
 import { SocialIconLinkedin, SocialIconX, SocialIconWhatsApp } from './SocialIcons';
@@ -11,13 +12,13 @@ const Footer = () => {
       <div className="container mx-auto px-4 md:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="md:col-span-2">
-            <a href="/" aria-label="Flow Networks Home" className="flex items-center group w-fit">
+            <Link to="/" aria-label="Flow Networks Home" className="flex items-center group w-fit">
               <FlowLogo className="h-8 w-auto" />
               <div className="flex flex-col justify-center ml-2">
                 <span className="text-sm font-bold uppercase text-foreground">Flow</span>
                 <span className="text-sm font-bold uppercase text-foreground -mt-1">Networks</span>
               </div>
-            </a>
+            </Link>
             <p className="text-muted-foreground mt-4 text-sm max-w-xs">
               The operating system for intelligent venues, powered by Purple.
             </p>
@@ -29,9 +30,9 @@ const Footer = () => {
               <ul className="space-y-3">
                 {section.subLinks?.slice(0, 5).map(link => (
                   <li key={link.href}>
-                    <a href={link.href} className="text-muted-foreground hover:text-accent transition-colors text-sm">
+                    <Link to={link.href} className="text-muted-foreground hover:text-accent transition-colors text-sm">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
