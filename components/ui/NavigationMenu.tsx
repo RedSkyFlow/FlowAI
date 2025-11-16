@@ -1,6 +1,5 @@
 
 import React, { useState, createContext, useContext, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { cn } from '../../lib/utils';
 import { ChevronDown } from '../Icons';
 
@@ -111,23 +110,18 @@ export const NavigationMenuContent: React.FC<{ children: React.ReactNode; classN
 };
 
 
-export const NavigationMenuLink = React.forwardRef<
-  HTMLAnchorElement,
-  React.ComponentPropsWithoutRef<typeof Link>
->(({ className, ...props }, ref) => {
+export const NavigationMenuLink = React.forwardRef<HTMLAnchorElement, React.ComponentPropsWithoutRef<'a'>>(({ className, children, ...props }, ref) => {
   return (
-    <Link
-      ref={ref}
-      className={className}
-      {...props}
-    />
+    <a ref={ref} className={className} {...props}>
+      {children}
+    </a>
   );
 });
 NavigationMenuLink.displayName = "NavigationMenuLink";
 
 export const ListItem = React.forwardRef<
-  React.ElementRef<typeof Link>,
-  React.ComponentPropsWithoutRef<typeof Link>
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
 >(({ className, title, children, ...props }, ref) => {
   return (
     <li>

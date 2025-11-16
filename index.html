@@ -40,22 +40,153 @@
       ]
     }
     </script>
-<script type="importmap">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        /* CORRECTED HIERARCHY FROM DESIGN DOCUMENT */
+        --primary: 176 83% 46%;      /* Flow Primary Teal       | #14D8CC */
+        --secondary: 205 100% 51%;   /* Flow Action Blue      | #0496FF */
+        --accent: 40 100% 64%;       /* Flow Highlight Yellow | #FFC145 */
+        --background: 233 36% 17%;    /* Background Dark Primary | #1C203C */
+        --foreground: 290 25% 95%;    /* Text Light            | #F5F0F6 */
+
+        /* Derived colors, updated for consistency */
+        --primary-foreground: 176 83% 5%;
+        --secondary-foreground: 0 0% 100%;
+        --accent-foreground: 40 100% 5%;
+
+        --card: 233 15% 21%;
+        --card-foreground: 290 25% 95%;
+        --popover: 233 15% 19%;
+        --popover-foreground: 290 25% 95%;
+        --muted: 233 15% 30%;
+        --muted-foreground: 233 15% 65%;
+        --border: 233 15% 25%;
+        --input: 233 15% 23%;
+        --ring: 205 100% 51%;
+
+        /* Glows will update automatically based on core colors */
+        --glow-primary: 0 0 25px hsla(var(--primary) / 0.4);
+        --glow-secondary: 0 0 25px hsla(var(--secondary) / 0.4);
+        --glow-accent: 0 0 25px hsla(var(--accent) / 0.4);
+        --glow-primary-strong: 0 0 35px hsla(var(--primary) / 0.6);
+        --glow-secondary-strong: 0 0 35px hsla(var(--secondary) / 0.6);
+        --glow-accent-strong: 0 0 35px hsla(var(--accent) / 0.6);
+
+        --radius: 0.75rem;
+        --transition-standard: 300ms;
+        --ease-gentle: cubic-bezier(0.4, 0.0, 0.2, 1);
+        --lift-subtle: translateY(-4px);
+      }
+      
+      body {
+        color: hsl(var(--foreground));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        /* DIAGNOSTIC STEP: Simple animated gradient to test file writing and rendering. */
+        background: linear-gradient(-45deg, hsl(var(--background)), hsl(var(--primary) / 0.15), hsl(var(--background)), hsl(var(--secondary) / 0.15));
+        background-size: 400% 400%;
+        animation: gradient-move 15s ease infinite;
+      }
+      
+      @keyframes gradient-move {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+    </style>
+  <script type="importmap">
 {
   "imports": {
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
-    "@tsparticles/react": "https://aistudiocdn.com/@tsparticles/react@^3.0.0",
+    "tsparticles": "https://cdn.jsdelivr.net/npm/tsparticles@3.4.0/+esm",
     "@tsparticles/engine": "https://aistudiocdn.com/@tsparticles/engine@^3.9.1",
-    "tsparticles": "https://aistudiocdn.com/tsparticles@^3.9.1",
-    "vite": "https://aistudiocdn.com/vite@^7.2.2",
-    "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1",
-    "path": "https://aistudiocdn.com/path@^0.12.7"
+    "@tsparticles/react": "https://aistudiocdn.com/@tsparticles/react@^3.0.0"
   }
 }
 </script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: 'hsl(var(--primary))',
+              foreground: 'hsl(var(--primary-foreground))',
+            },
+            secondary: {
+              DEFAULT: 'hsl(var(--secondary))',
+              foreground: 'hsl(var(--secondary-foreground))',
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))',
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))',
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))',
+            },
+            popover: {
+                DEFAULT: 'hsl(var(--popover))',
+                foreground: 'hsl(var(--popover-foreground))',
+            }
+          },
+          borderRadius: {
+            lg: "var(--radius)",
+            md: "calc(var(--radius) - 2px)",
+            sm: "calc(var(--radius) - 4px)",
+          },
+          boxShadow: {
+            'glow-primary': 'var(--glow-primary)',
+            'glow-secondary': 'var(--glow-secondary)',
+            'glow-accent': 'var(--glow-accent)',
+            'glow-primary-strong': 'var(--glow-primary-strong)',
+            'glow-secondary-strong': 'var(--glow-secondary-strong)',
+            'glow-accent-strong': 'var(--glow-accent-strong)',
+          },
+          transitionTimingFunction: {
+            gentle: 'var(--ease-gentle)',
+          },
+          transitionDuration: {
+            standard: 'var(--transition-standard)',
+          },
+           animation: {
+            'gradient-move': 'gradient-move 8s ease-in-out infinite',
+            'fade-in-up': 'fade-in-up 0.8s var(--ease-gentle) forwards',
+            'ken-burns': 'ken-burns 20s ease-in-out infinite',
+           },
+           keyframes: {
+             'fade-in-up': {
+                'from': {
+                  opacity: '0',
+                  transform: 'translateY(20px)',
+                },
+                'to': {
+                  opacity: '1',
+                  transform: 'translateY(0)',
+                },
+             },
+             'ken-burns': {
+               '0%, 100%': { transform: 'scale(1.05) rotate(-1deg)' },
+               '50%': { transform: 'scale(1.15) rotate(1deg)' },
+             },
+           },
+        },
+      },
+    };
+  </script>
 </head>
   <body class="text-foreground">
     <div id="root"></div>
