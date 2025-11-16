@@ -1,16 +1,12 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { Check } from './Icons';
+import { IMAGES } from '../assets';
 
 const CnnTapSection = () => {
     return (
         <section 
             className="py-20 md:py-32 bg-card/20 relative overflow-hidden"
-            style={{
-                backgroundImage: 'url(https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/tech-pattern-bg.svg)',
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-            }}
         >
             <div className="absolute inset-0 bg-card/80 backdrop-blur-[2px]"></div>
             <div className="container mx-auto px-4 md:px-6 relative z-10">
@@ -62,7 +58,7 @@ const CnnTapSection = () => {
                        <div className="relative">
                             <div className="absolute -inset-2 bg-gradient-to-br from-secondary via-primary to-accent rounded-lg opacity-20 blur-xl"></div>
                             <img 
-                                src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/cnntap-mockup.png" 
+                                src={IMAGES.HOMEPAGE.CNNTAP_MOCKUP}
                                 alt="CNN TAP on a mobile phone" 
                                 className="relative rounded-lg shadow-2xl shadow-black/30 w-full max-w-sm"
                             />
@@ -72,10 +68,10 @@ const CnnTapSection = () => {
                  <div className="mt-16 text-center">
                     <p className="text-sm font-semibold text-muted-foreground tracking-wider uppercase">Trusted by world-renowned hospitality brands</p>
                     <div className="flex justify-center items-center gap-x-8 sm:gap-x-12 mt-6 grayscale opacity-60">
-                        <img src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/hilton-logo.svg" alt="Hilton" className="h-6 sm:h-8" />
-                        <img src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/radisson-logo.svg" alt="Radisson" className="h-10 sm:h-12" />
-                        <img src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/ihg-logo.svg" alt="IHG" className="h-10 sm:h-12" />
-                        <img src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/steigenberger-logo.svg" alt="Steigenberger" className="h-6 sm:h-8" />
+                        <img src={IMAGES.LOGOS.HILTON} alt="Hilton" className="h-6 sm:h-8" />
+                        <img src={IMAGES.LOGOS.RADISSON} alt="Radisson" className="h-10 sm:h-12" />
+                        <img src={IMAGES.LOGOS.IHG} alt="IHG" className="h-10 sm:h-12" />
+                        <img src={IMAGES.LOGOS.STEIGENBERGER} alt="Steigenberger" className="h-6 sm:h-8" />
                     </div>
                 </div>
             </div>

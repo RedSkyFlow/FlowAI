@@ -2,11 +2,12 @@
 import React from 'react';
 import { Button } from './ui/Button';
 import { ArrowRight } from './Icons';
+import { IMAGES } from '../assets';
 
 const HeroImageBackground = () => (
     <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-            src="https://storage.googleapis.com/aistudio-hosting/project-assets/images/a8383921-1279-4d1a-9657-37a5996f2a63.jpeg"
+            src={IMAGES.GLOBAL.AI_GATEWAY_HERO}
             alt="Intelligent Venue AI network visualization"
             className="w-full h-full object-cover animate-ken-burns"
         />

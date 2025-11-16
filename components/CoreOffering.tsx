@@ -2,6 +2,7 @@
 import React from 'react';
 import { ArrowRight } from './Icons';
 import { Button } from './ui/Button';
+import { IMAGES } from '../assets';
 
 const CoreOffering = () => {
     return (
@@ -51,7 +52,7 @@ const CoreOffering = () => {
                         <div className="relative group">
                             <div className="absolute -inset-2 bg-gradient-to-br from-secondary via-primary to-accent rounded-2xl opacity-20 group-hover:opacity-40 blur-2xl transition-opacity duration-500 animate-pulse" style={{ animationDuration: '6s' }}></div>
                             <img 
-                                src="https://storage.googleapis.com/aistudio-hosting/project-assets/images/a8383921-1279-4d1a-9657-37a5996f2a63.jpeg"
+                                src={IMAGES.GLOBAL.DATA_STREAM_INTEGRATIONS}
                                 alt="Visual representation of data flowing into a central AI core"
                                 className="relative w-full max-w-md rounded-2xl"
                             />

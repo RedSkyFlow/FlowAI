@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "tsparticles": "3.4.0",
+    "@tsparticles/engine": "^3.9.1",
+    "@tsparticles/react": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

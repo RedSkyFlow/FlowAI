@@ -1,0 +1,62 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Group for circuit lines with traveling light pulses -->
+  <g stroke="#14D8CC" stroke-width="1">
+    <!-- Horizontal lines -->
+    <path id="path1" d="M0 50 H200" />
+    <path id="path2" d="M0 150 H200" />
+    <!-- Vertical lines -->
+    <path id="path3" d="M50 0 V200" />
+    <path id="path4" d="M150 0 V200" />
+
+    <!-- Diagonal and shorter branching lines -->
+    <path id="path5" d="M50 50 L100 100 L50 150" />
+    <path id="path6" d="M150 50 L100 100 L150 150" />
+    <path id="path7" d="M0 100 H50" />
+    <path id="path8" d="M150 100 H200" />
+    <path id="path9" d="M100 0 V50" />
+    <path id="path10" d="M100 150 V200" />
+
+    <!-- Central "chip" area lines -->
+    <path id="path11" d="M70 70 H130 V130 H70 Z" />
+    <path id="path12" d="M70 70 L50 50" />
+    <path id="path13" d="M130 70 L150 50" />
+    <path id="path14" d="M70 130 L50 150" />
+    <path id="path15" d="M130 130 L150 150" />
+  </g>
+
+  <!-- Group for nodes -->
+  <g fill="#FFC145" opacity="0.8">
+    <!-- Nodes at intersections and ends -->
+    <circle cx="0" cy="50" r="2" />
+    <circle cx="50" cy="50" r="2" />
+    <circle cx="100" cy="50" r="2" />
+    <circle cx="150" cy="50" r="2" />
+    <circle cx="200" cy="50" r="2" />
+
+    <circle cx="0" cy="150" r="2" />
+    <circle cx="50" cy="150" r="2" />
+    <circle cx="100" cy="150" r="2" />
+    <circle cx="150" cy="150" r="2" />
+    <circle cx="200" cy="150" r="2" />
+
+    <circle cx="50" cy="0" r="2" />
+    <circle cx="50" cy="100" r="2" />
+    <circle cx="50" cy="200" r="2" />
+
+    <circle cx="150" cy="0" r="2" />
+    <circle cx="150" cy="100" r="2" />
+    <circle cx="150" cy="200" r="2" />
+
+    <circle cx="100" cy="100" r="2" />
+    <circle cx="0" cy="100" r="2" />
+    <circle cx="200" cy="100" r="2" />
+    <circle cx="100" cy="0" r="2" />
+    <circle cx="100" cy="200" r="2" />
+
+    <!-- Nodes for the "chip" area -->
+    <circle cx="70" cy="70" r="2" />
+    <circle cx="130" cy="70" r="2" />
+    <circle cx="70" cy="130" r="2" />
+    <circle cx="130" cy="130" r="2" />
+  </g>
+</svg>

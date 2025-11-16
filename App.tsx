@@ -4,8 +4,9 @@ import AppHeader from './components/AppHeader';
 import Footer from './components/Footer';
 import HomePage from './HomePage';
 import ProductsOverview from './pages/ProductsOverview';
-import { usePathname } from './hooks/usePathname';
+import { usePathname, navigate } from './hooks/usePathname';
 import IntelligentWifi from './pages/IntelligentWifi';
+import ParticleBackground from './components/ParticleBackground';
 
 const App: React.FC = () => {
   const pathname = usePathname();
@@ -17,9 +18,31 @@ const App: React.FC = () => {
     };
     
     document.body.addEventListener('mousemove', handleMouseMove);
+
+    const handleLinkClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      const anchor = target.closest('a');
+
+      if (
+        anchor &&
+        anchor.target !== '_blank' &&
+        anchor.href &&
+        anchor.getAttribute('href')?.startsWith('/')
+      ) {
+        if (!event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+          event.preventDefault();
+          if (anchor.pathname !== window.location.pathname) {
+            navigate(anchor.pathname);
+          }
+        }
+      }
+    };
+
+    window.addEventListener('click', handleLinkClick);
     
     return () => {
       document.body.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('click', handleLinkClick);
     };
   }, []);
 
@@ -34,7 +57,8 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen font-sans flex flex-col">
+    <div className="min-h-screen font-sans flex flex-col bg-transparent">
+      <ParticleBackground />
       <AppHeader />
       <main className="flex-grow">
         {renderPage()}

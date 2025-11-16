@@ -1,13 +1,16 @@
+
+
 import React from 'react';
 import { MAIN_NAV_LINKS } from '../constants';
 import { NavLinkWithSubLinks } from '../types';
 import { Button } from '../components/ui/Button';
 import { ArrowRight } from '../components/Icons';
+import { IMAGES } from '../assets';
 
 const HeroImageBackground = () => (
     <div className="absolute inset-0 z-0 overflow-hidden">
         <img 
-            src="https://storage.googleapis.com/aistudio-hosting/templates/d8d4c9d9-05b1-460d-8547-06385f02f06b/assets/products-hero-bg.jpg"
+            src={IMAGES.PRODUCTS.OVERVIEW_HERO}
             alt="Abstract visualization of product blocks"
             className="w-full h-full object-cover animate-ken-burns"
         />
@@ -16,35 +19,36 @@ const HeroImageBackground = () => (
     </div>
 );
 
+// FIX: Moved the ProductCard component outside of the ProductsOverview component to prevent it from being recreated on every render. This is a React best practice that also resolves the TypeScript error related to the 'key' prop.
+const ProductCard = ({ product, index }: { product: NavLinkWithSubLinks, index: number }) => (
+    <div 
+        className="bg-card/30 backdrop-blur-md border border-border/50 rounded-lg p-8 flex flex-col transition-all duration-standard ease-gentle hover:-translate-y-2 hover:shadow-glow-primary-strong animate-fade-in-up"
+        style={{ animationDelay: `${200 + index * 100}ms` }}
+    >
+        <div className="flex items-start space-x-4">
+            {product.icon && (
+                <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg border border-primary/20">
+                    {React.createElement(product.icon, { className: "h-6 w-6 text-primary" })}
+                </div>
+            )}
+            <div>
+                <h3 className="text-xl font-semibold text-foreground mb-2">{product.label}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed flex-grow">{product.shortDescription}</p>
+            </div>
+        </div>
+         <div className="mt-6 flex-shrink-0">
+            <Button href={product.href} variant="ghost" size="sm" className="group text-accent font-semibold">
+                Learn More
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+        </div>
+    </div>
+);
+
 const ProductsOverview = () => {
     const productsLink = MAIN_NAV_LINKS.find(link => link.label === 'Products');
     const corePlatforms = productsLink?.subLinks?.filter(p => p.category === 'Core Platforms') || [];
     const services = productsLink?.subLinks?.filter(p => p.category === 'Services & Add-Ons') || [];
-
-    const ProductCard = ({ product, index }: { product: NavLinkWithSubLinks, index: number }) => (
-        <div 
-            className="bg-card/30 backdrop-blur-md border border-border/50 rounded-lg p-8 flex flex-col transition-all duration-standard ease-gentle hover:-translate-y-2 hover:shadow-glow-primary-strong animate-fade-in-up"
-            style={{ animationDelay: `${200 + index * 100}ms` }}
-        >
-            <div className="flex items-start space-x-4">
-                {product.icon && (
-                    <div className="flex-shrink-0 bg-primary/10 p-3 rounded-lg border border-primary/20">
-                        {React.createElement(product.icon, { className: "h-6 w-6 text-primary" })}
-                    </div>
-                )}
-                <div>
-                    <h3 className="text-xl font-semibold text-foreground mb-2">{product.label}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed flex-grow">{product.shortDescription}</p>
-                </div>
-            </div>
-             <div className="mt-6 flex-shrink-0">
-                <Button href={product.href} variant="ghost" size="sm" className="group text-accent font-semibold">
-                    Learn More
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-            </div>
-        </div>
-    );
 
     return (
         <>

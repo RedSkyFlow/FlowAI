@@ -1,25 +1,14 @@
 
+
 import React, { useState } from 'react';
 import { Button } from '../components/ui/Button';
 import { ArrowRight, Wifi, UserCheck, Megaphone, Hotel, ShoppingCart, Plane, TrendingUp, Wrench, ShieldCheck } from '../components/Icons';
 import { cn } from '../lib/utils';
 import { IMAGES } from '../assets';
 
-const HeroImageBackground = () => (
-    <div className="absolute inset-0 z-0 overflow-hidden">
-        <img 
-            src={IMAGES.AI_GATEWAY_HERO}
-            alt="Abstract network visualization"
-            className="w-full h-full object-cover animate-ken-burns"
-        />
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent"></div>
-    </div>
-);
-
 const WifiHero = () => (
-    <section className="relative flex flex-col justify-center items-center text-center overflow-hidden py-24 sm:py-32">
-        <HeroImageBackground />
+    <section className="relative flex flex-col justify-center items-center text-center py-24 sm:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-background/90 z-0"></div>
         <div className="container relative z-10 mx-auto px-4 md:px-6">
             <div className="animate-fade-in-up" style={{ animationDelay: '200ms' }}>
                 <h1 className="text-4xl font-bold tracking-tight text-transparent sm:text-6xl md:text-7xl bg-clip-text bg-gradient-to-r from-accent via-primary-foreground to-accent animate-gradient-move bg-[length:250%_auto]">
@@ -53,21 +42,21 @@ const HowItWorks = () => {
             title: "Sensory Input",
             subtitle: "Connect & Capture",
             description: "The WiFi connection provides irrefutable proof of physical presence. Through branded splash pages, you capture critical first-party data, bridging the physical and digital worlds.",
-            image: IMAGES.AI_GATEWAY_CROP_SENSORY
+            image: IMAGES.INDUSTRIES.AIRPORT_HERO
         },
         {
             phase: "Phase 2",
             title: "Intelligent Orchestration",
             subtitle: "The AI Gateway",
             description: "Our AI Gateway fuses real-time location data with siloed information from your PMS, POS, and CRM systems, creating a single, evolving profile with hyper-local context.",
-            image: IMAGES.AI_GATEWAY_CROP_ORCHESTRATION
+            image: IMAGES.GLOBAL.DATA_STREAM_INTEGRATIONS
         },
         {
             phase: "Phase 3",
             title: "Automated Action",
             subtitle: "Engage & Convert",
             description: "Trigger hyper-contextual messages via SMS, WhatsApp, and email at the precise moment of relevance, transforming a passive visit into an interactive, revenue-driving experience.",
-            image: IMAGES.AI_GATEWAY_CROP_ACTION
+            image: IMAGES.INDUSTRIES.RETAIL_HERO
         }
     ];
 
@@ -151,7 +140,7 @@ const AiGatewaySection = () => (
                     <div className="relative group">
                         <div className="absolute -inset-2 bg-gradient-to-br from-secondary via-primary to-accent rounded-2xl opacity-20 group-hover:opacity-40 blur-2xl transition-opacity duration-500"></div>
                         <img 
-                            src={IMAGES.AI_GATEWAY_HERO}
+                            src={IMAGES.GLOBAL.AI_GATEWAY_HERO}
                             alt="AI Gateway data visualization"
                             className="relative w-full max-w-lg rounded-2xl shadow-2xl shadow-black/30"
                         />
@@ -165,9 +154,9 @@ const AiGatewaySection = () => (
 const IndustryUseCases = () => {
     const [activeTab, setActiveTab] = useState('Hospitality');
     const tabs = [
-        { name: 'Hospitality', icon: Hotel, content: "A returning couple connects to the WiFi. The AI greets them by name, recognizes their anniversary from the PMS, and proactively offers to book a table at their favorite on-site restaurant.", color: 'hsla(var(--primary) / 0.2)' },
-        { name: 'Retail', icon: ShoppingCart, content: "A shopper's dwell time near an electronics store triggers a personalized SMS with a time-sensitive 15% discount, turning passive browsing into an immediate sales opportunity.", color: 'hsla(var(--secondary) / 0.2)' },
-        { name: 'Airports', icon: Plane, content: "A frequent flyer connects automatically via Passpoint. The AI recognizes them, confirms their flight is on time at Gate B12, and offers complimentary lounge access, streamlining their journey.", color: 'hsla(var(--accent) / 0.2)' },
+        { name: 'Hospitality', icon: Hotel, content: "A returning couple connects to the WiFi. The AI greets them by name, recognizes their anniversary from the PMS, and proactively offers to book a table at their favorite on-site restaurant.", image: IMAGES.INDUSTRIES.HOSPITALITY_HERO },
+        { name: 'Retail', icon: ShoppingCart, content: "A shopper's dwell time near an electronics store triggers a personalized SMS with a time-sensitive 15% discount, turning passive browsing into an immediate sales opportunity.", image: IMAGES.INDUSTRIES.RETAIL_HERO },
+        { name: 'Airports', icon: Plane, content: "A frequent flyer connects automatically via Passpoint. The AI recognizes them, confirms their flight is on time at Gate B12, and offers complimentary lounge access, streamlining their journey.", image: IMAGES.INDUSTRIES.AIRPORT_HERO },
     ];
 
     const activeTabData = tabs.find(tab => tab.name === activeTab);
@@ -179,37 +168,50 @@ const IndustryUseCases = () => {
                     <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">The Synergy in Action</h2>
                     <p className="mt-4 text-lg text-muted-foreground">See how our platform delivers measurable value across different industries.</p>
                 </div>
-                <div className="relative bg-card rounded-xl shadow-2xl overflow-hidden border border-border/50">
-                    <div className="absolute inset-0 transition-opacity duration-1000">
-                        <img src={IMAGES.AI_GATEWAY_HERO} alt="AI Network" className="w-full h-full object-cover opacity-10" />
-                        <div className="absolute inset-0 bg-background/80"></div>
+                <div className="bg-card rounded-xl shadow-2xl overflow-hidden border border-border/50 grid md:grid-cols-3">
+                    <div className="flex flex-col border-b md:border-b-0 md:border-r border-border/50">
+                        {tabs.map(tab => (
+                            <button
+                                key={tab.name}
+                                onClick={() => setActiveTab(tab.name)}
+                                className={cn(
+                                    "p-6 text-left flex items-center gap-4 transition-colors duration-300 relative",
+                                    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-card",
+                                    activeTab === tab.name ? "" : "hover:bg-primary/5"
+                                )}
+                            >
+                                <div className={cn(
+                                    "absolute inset-0 transition-all duration-300 ease-gentle",
+                                    activeTab === tab.name ? "bg-primary/10 opacity-100" : "opacity-0"
+                                )}></div>
+                                <div className={cn(
+                                    "absolute left-0 top-0 h-full w-1 bg-primary transition-all duration-300 ease-gentle",
+                                     activeTab === tab.name ? "scale-y-100" : "scale-y-0"
+                                )}></div>
+                                <div className="relative z-10 flex items-center gap-4">
+                                  <tab.icon className={cn("h-8 w-8 transition-colors", activeTab === tab.name ? "text-primary" : "text-muted-foreground")} />
+                                  <span className={cn("text-lg font-semibold transition-colors", activeTab === tab.name ? "text-primary" : "text-foreground")}>{tab.name}</span>
+                                </div>
+                            </button>
+                        ))}
                     </div>
-                     <div 
-                        className="absolute inset-0 transition-colors duration-700"
-                        style={{ backgroundColor: activeTabData?.color }}
-                    ></div>
-                    <div className="relative z-10 grid md:grid-cols-3">
-                        <div className="flex flex-col border-b md:border-b-0 md:border-r border-border/50">
-                            {tabs.map(tab => (
-                                <button
-                                    key={tab.name}
-                                    onClick={() => setActiveTab(tab.name)}
-                                    className={cn(
-                                        "p-6 text-left flex items-center gap-4 transition-colors duration-300",
-                                        activeTab === tab.name ? "bg-primary/10" : "hover:bg-primary/5"
-                                    )}
-                                >
-                                    <tab.icon className={cn("h-8 w-8", activeTab === tab.name ? "text-primary" : "text-muted-foreground")} />
-                                    <span className={cn("text-lg font-semibold", activeTab === tab.name ? "text-primary" : "text-foreground")}>{tab.name}</span>
-                                </button>
-                            ))}
-                        </div>
-                        <div className="md:col-span-2 p-8 md:p-12 min-h-[250px] flex items-center">
-                            <p className="text-xl text-foreground/90 leading-relaxed">{activeTabData?.content}</p>
+                    <div className="md:col-span-2 min-h-[300px] md:min-h-[400px] flex items-end p-8 md:p-12 relative">
+                        {tabs.map(tab => (
+                           <div key={tab.name} className={cn(
+                               "absolute inset-0 transition-opacity duration-1000 ease-gentle",
+                               activeTab === tab.name ? "opacity-100" : "opacity-0"
+                           )}>
+                                <img src={tab.image} alt={`${tab.name} use case`} className="w-full h-full object-cover" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                           </div>
+                        ))}
+                         <div className="relative z-10">
+                            <p className="text-xl text-white/90 leading-relaxed max-w-lg shadow-text">{activeTabData?.content}</p>
                         </div>
                     </div>
                 </div>
             </div>
+             <style>{`.shadow-text { text-shadow: 0 1px 4px rgba(0,0,0,0.7); }`}</style>
         </section>
     );
 };
@@ -218,7 +220,7 @@ const BusinessOutcomes = () => {
     const outcomes = [
         { icon: TrendingUp, title: "Unlock New Revenue", description: "Move beyond generic marketing to deliver personalized offers that directly influence purchasing behavior and create new monetization opportunities through targeted advertising." },
         { icon: Wrench, title: "Boost Operational Efficiency", description: "Empower staff with 'Actionable AI' that provides instant, context-aware answers and automates workflows, from stock checks to maintenance orders, reducing manual effort." },
-        { icon: ShieldCheck, title: "Build Data Sovereignty", description: "Own and control your customer relationships and data assets. Our flexible architecture ensures you retain full sovereignty, creating a deep, proprietary understanding of in-venue behavior." }
+        { icon: ShieldCheck, title: "Build Data Sovereignty", description: "Own and control your customer relationships and data assets. Our new architecture ensures you retain full sovereignty, creating a deep, proprietary understanding of in-venue behavior." }
     ];
     return (
          <section className="py-20 md:py-32">

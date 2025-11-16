@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { Menu, FlowLogo } from './Icons';
 import { usePathname } from '../hooks/usePathname';
@@ -12,37 +11,10 @@ import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
+  ListItem
 } from "./ui/NavigationMenu";
-
-const ListItem = React.forwardRef<
-  React.ElementRef<"a">,
-  React.ComponentPropsWithoutRef<"a">
->(({ className, title, children, ...props }, ref) => {
-  return (
-    <li>
-      <NavigationMenuLink asChild>
-        <a
-          ref={ref}
-          className={cn(
-            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-primary/10 focus:bg-primary/10",
-            className
-          )}
-          {...props}
-        >
-          <div className="text-sm font-medium leading-none text-card-foreground">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
-            {children}
-          </p>
-        </a>
-      </NavigationMenuLink>
-    </li>
-  );
-});
-ListItem.displayName = "ListItem";
 
 const DesktopDropdownMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) => boolean }) => {
   return (
@@ -50,18 +22,19 @@ const DesktopDropdownMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSu
       <NavigationMenuList>
         {MAIN_NAV_LINKS.map((link) => (
            link.href === '/' ? null : (
-          <NavigationMenuItem key={link.href}>
+          <NavigationMenuItem key={link.href} value={link.label}>
             {link.subLinks && link.subLinks.length > 0 ? (
               <>
                 <NavigationMenuTrigger 
-                   className={cn(navigationMenuTriggerStyle(), "bg-transparent text-sm", isLinkActive(link) ? "text-accent font-semibold" : "text-foreground/90 hover:text-accent")}
+                   value={link.label}
+                   className={cn("bg-transparent text-sm", isLinkActive(link) ? "text-secondary font-semibold" : "text-foreground/90 hover:text-primary")}
                 >
                   <span className="flex items-center gap-2">
                     {link.icon && React.createElement(link.icon, { className: "h-4 w-4" })}
                     {link.label}
                   </span>
                 </NavigationMenuTrigger>
-                <NavigationMenuContent>
+                <NavigationMenuContent value={link.label}>
                   <div className="p-4 md:w-[600px] lg:w-[750px] bg-popover/80 backdrop-blur-xl border border-border/50 rounded-lg shadow-2xl">
                      <div className="grid grid-cols-3 gap-x-6 gap-y-4">
                         {Object.entries(
@@ -90,7 +63,7 @@ const DesktopDropdownMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSu
                 </NavigationMenuContent>
               </>
             ) : (
-              <a href={link.href} className={cn(navigationMenuTriggerStyle(), "bg-transparent text-sm", isLinkActive(link) ? "text-accent font-semibold" : "text-foreground/90 hover:text-accent")}>
+              <a href={link.href} className={cn("inline-flex h-10 w-max items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors hover:bg-muted/50 hover:text-primary focus:bg-muted/50 focus:text-primary focus:outline-none", isLinkActive(link) ? "text-secondary font-semibold" : "text-foreground/90")}>
                    <div className="flex items-center gap-2">
                       {link.icon && React.createElement(link.icon, { className: "h-4 w-4" })}
                       {link.label}
@@ -111,7 +84,6 @@ const MobileMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) =
         {subLinks.map((subLink) => (
           <li key={subLink.href}>
             {subLink.subLinks && subLink.subLinks.length > 0 ? (
-              // FIX: Removed `collapsible` prop which is not supported by the custom Accordion component.
               <Accordion type="single" className="w-full">
                 <AccordionItem value={subLink.label} className="border-none">
                   <AccordionTrigger className="py-2 text-md font-medium text-muted-foreground hover:text-foreground hover:no-underline">
@@ -157,7 +129,7 @@ const MobileMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) =
                             link.subLinks && link.subLinks.length > 0 ? (
                                 <AccordionItem key={link.label} value={link.label} className="border-b border-border">
                                     <AccordionTrigger>
-                                        <span className={cn("flex items-center gap-2 text-lg font-semibold", isLinkActive(link) ? "text-accent" : "text-foreground/90 hover:text-accent")}>
+                                        <span className={cn("flex items-center gap-2 text-lg font-semibold", isLinkActive(link) ? "text-secondary" : "text-foreground/90 hover:text-primary")}>
                                           {link.icon && React.createElement(link.icon, { className: "h-5 w-5" })}
                                           {link.label}
                                         </span>
@@ -168,7 +140,7 @@ const MobileMenu = ({ isLinkActive }: { isLinkActive: (l: NavLinkWithSubLinks) =
                                 </AccordionItem>
                             ) : (
                                 <SheetClose key={link.href} asChild>
-                                    <a href={link.href} className={cn("flex items-center gap-2 text-lg font-semibold py-4 border-b border-border", isLinkActive(link) ? 'text-accent' : 'text-foreground/90 hover:text-accent')}>
+                                    <a href={link.href} className={cn("flex items-center gap-2 text-lg font-semibold py-4 border-b border-border", isLinkActive(link) ? 'text-secondary' : 'text-foreground/90 hover:text-primary')}>
                                       <span className="flex items-center gap-2">
                                         {link.icon && React.createElement(link.icon, { className: "h-5 w-5" })}
                                         {link.label}

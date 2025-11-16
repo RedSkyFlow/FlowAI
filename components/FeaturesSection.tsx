@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Wifi, MessageSquare, Lock, BarChart3, UserCheck, ShieldCheck, Mic } from './Icons';
 
@@ -49,7 +48,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-20 md:py-32 bg-background">
+    <section className="py-20 md:py-32">
       <div className="container mx-auto px-4 md:px-6">
         <div className="text-center max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl animate-fade-in-up">
@@ -68,8 +67,8 @@ const FeaturesSection = () => {
               style={{ animationDelay: `${200 + index * 100}ms` }}
             >
               <div className="flex justify-center items-center mb-6">
-                 <div className="bg-primary/10 p-4 rounded-full border border-primary/20">
-                    <feature.icon className="h-8 w-8 text-primary" />
+                 <div className="bg-accent/10 p-4 rounded-full border border-accent/20">
+                    <feature.icon className="h-8 w-8 text-accent" />
                  </div>
               </div>
               <h3 className="text-xl font-semibold text-foreground mb-2">
